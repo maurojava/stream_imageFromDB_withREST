@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImmagineEditDlg" widgetVar="ImmagineEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditImmagineTitle}">
+            <h:form id="ImmagineEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{immagineController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditImmagineLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{immagineController.selected.id}" title="#{bundle.EditImmagineTitle_id}" required="true" requiredMessage="#{bundle.EditImmagineRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditImmagineLabel_contentType}" for="contentType" />
+                        <p:inputText id="contentType" value="#{immagineController.selected.contentType}" title="#{bundle.EditImmagineTitle_contentType}" />
+                        <p:outputLabel value="#{bundle.EditImmagineLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{immagineController.selected.name}" title="#{bundle.EditImmagineTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditImmagineLabel_byteImmagine}" for="byteImmagine" />
+                        <p:inputTextarea rows="4" cols="30" id="byteImmagine" value="#{immagineController.selected.byteImmagine}" title="#{bundle.EditImmagineTitle_byteImmagine}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{immagineController.update}" value="#{bundle.Save}" update="display,:ImmagineListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImmagineEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ImmagineEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
